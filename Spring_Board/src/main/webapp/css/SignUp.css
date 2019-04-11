@@ -1,0 +1,75 @@
+@charset "UTF-8";
+#container{
+	position: relative;
+	top: 100px;
+	left: 150px;
+	width: 1000px;
+}
+#title{
+	position: relative;
+	
+}
+#TitleImage{
+	width: 950px;
+	height: 70px;
+}
+#info{
+/*  	border: 1px solid black;width는1000px을 가진다.  */
+	position: relative;
+	margin-top: 5px;
+	width: 950px;
+	height: 250px;
+}
+#LeftInfo{
+/* 	border: 1px solid black; */
+	float: left;
+	width: 230px;
+	height: 240px;
+	margin-left: 20px;
+	margin-right: 50px;
+	font-weight: bold;
+	font-size: 40px;
+	
+}
+#CenterInfo{
+	border: 1px solid black;
+	width: 700px;
+}
+#name{
+	margin-top: 30px;
+}
+#name, #id, #pw, #passOK{
+	margin-bottom: 10px;
+	width: 200px;
+	height: 20px;
+}
+/*#name만 있는 것과 #name, #id, #pw, #passOK는 다 id로 같은 등급이기 때문에 오버라이드되어서 하나만 먹힌다.*/
+#line{
+	position: relative;
+	border-bottom: 2px solid gray;
+	left: 20px;/*position이 잡혀있을때 사용이 가능하다. */
+	width: 800px;
+	height: 20px;
+}
+#bottom{ /*fixed는 relative와 상관없이 움직임*/
+	width: 700px;
+	position: absolute; /*absolute는 relative안에서만 움직인다. */
+	left: 250px;
+	color: gray;
+	font-size: 11px;
+}
+#bottomStrong{
+	position: relative;
+	font-size: 15px;
+	color: black;
+	left: 10px;
+	top: 10px;
+	bottom: 10px;
+}
+#button{
+	position: relative;/*버튼이 글 위로 올라감*/
+	margin-top: 40px;
+	left: 50px;
+	/*w3schools - position 검색*/
+	
+}

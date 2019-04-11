@@ -1,0 +1,67 @@
+@charset "UTF-8";
+::-webkit-input-placeholder{/*버전에 맞춰서 자동으로 해줌 */
+	color:red;
+}
+#container{
+	position:relative;
+	margin: auto;
+	top: 160px;
+	border: 5px solid tomato;
+	width: 400px;
+	height: 200px;
+	
+	padding: 0px;
+}
+#title{
+	margin-top: 10px;
+	padding-left: 50px;
+	font-size: 40px;
+	font-weight: bold;/*두껍게*/
+	color:red;
+	margin-bottom: 10px;
+}
+#id{
+	margin-left: 50px;
+	font-weight: bold;
+	float: left;
+	margin-right: 26px;
+}
+#pw{
+	float: left;
+	font-weight: bold;
+	margin-left: 50px;
+	margin-right: 10px;
+}
+#login{
+	position: relative;
+	left: 120px;
+	margin: 5px;
+	background-color: red;
+	border: 1px solid white;
+	color: white;
+	width: 100px;
+	height:40px;
+	font-weight: bold;
+}
+#bottom{
+	position: relative;
+	left: 50px;
+}
+#SignUp, #SearchId, #SearchPw{
+	width: 90px;
+	font-size: 10px;
+}
+#SignUp{
+	background-color: #ffff80;
+	color: black;
+	border: 1px;
+	border-radius: 5px;
+	height: 20px;
+}
+#SearchId, #SearchPw{
+	background-color: white;
+	height: 20px;
+}
+a{
+	text-decoration: none;
+}

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<context:component-scan base-package="com.happy.prj"/>
+	<mvc:annotation-driven/>
+	
+<!-- 	<context:annotation-config/> -->
+<!-- 	<mvc:resources location="" mapping=""/>화면에서 들어왔을때 컨테이너에서 찾지못할떄 걸어준다. -->
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/"/>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	
+	<!-- 메일보내기 -->
+	<!-- bean이 만들어져있으므로 바로 autowried가능 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<!-- host : 서버주소 -->
+		<property name="host" value="smtp.gmail.com"/>
+		<!-- prot : 포트번호, 기본값은 25 -->
+		<property name="port" value="587"/>
+		<!-- username : 메일 보내기 위한 사용자 id -->
+		<property name="username" value="info.happy0612@gmail.com"/>
+		<!-- password : 계정에 관련된 비밀번호  -->
+		<property name="password" value="happy@0612"/>
+		<!--기본 인코딩 설정,   메일을 위한 인코딩, mailsender쓰면 작성하지 않아도 된다 -->
+<!-- 		<property name="defaultEncoding"/> -->
+		
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	
+	</bean>
+	
+	<!-- 캐쉬지우기 위한것 -->
+	<!-- 화면에서 response잡아도된다 -->
+	<mvc:interceptors>
+		<mvc:interceptor><!-- 인터셉터는 실행되는 빈이 무조건 한개 이상있어야한다.  -->	
+			<!-- 필터는 다잡아야 하는데 인터셉터는 선택해서잡을 수있다.  -->
+			<mvc:mapping path="/boardWriteForm.do"/>
+			<mvc:mapping path="/mail.do" />
+			<mvc:mapping path="/memberList.do"/>
+			<bean class="com.happy.prj.interceptor.Interceptor"/>
+		</mvc:interceptor>
+		
+		<bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+			<!-- 캐쉬를 지워줌 -->
+			<property name="cacheSeconds" value="0"/>
+			<!-- 정보 캐쉬들을 담는곳 , true로 해주어야 한번에 지워진다.? -->
+			<property name="useExpiresHeader" value="true"/>
+			<property name="useCacheControlHeader" value="true"/>
+			<!-- 저장안하겠다. -->
+			<property name="useCacheControlNoStore" value="true"/>
+			<!-- 이미지 캐쉬를 지우고 싶을때 사용 key에 있는 파일들은 어느정도의시간동안 지워지지않게하겠다. -->
+			<!-- 캐쉬를 지우지면 ***** -->
+			<property name="cacheMappings">
+				<props>
+<!-- 					<prop key="/view/**">86400</prop>60*60*24 -->
+						<prop key="/image/**">86400</prop>
+				</props>
+			</property>
+		</bean>
+	</mvc:interceptors>
+
+</beans>
